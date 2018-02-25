@@ -10,7 +10,7 @@ BillingCycle.after('post', sendErrorsOrNext).after('put',sendErrorsOrNext)
 function sendErrorsOrNext(req,res,next){
     const bundle = res.locals.bundle;
 
-    if(budle.errors){
+    if(bundle.errors){
       var errors = parseErrors(bundle.errors);
       res.status(500).json({errors})
     } else  {
