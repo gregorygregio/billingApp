@@ -10,6 +10,14 @@
     <field grid="12 6 4" text="Ano" model="bcCtrl.billingCycle.year" component-id="year"
           placeholder="Informe o Ano" type="number" readonly="bcCtrl.tabDelete"></field>
 
+    <div class="col-xs-12">
+      <fieldset>
+        <legend>Resumo</legend>
+        <div ng-include="'billingCycle/summary.html'"></div>
+      </fieldset>
+    </div>
+
+
     <div class="col-xs-12 col-sm-6">
       <fieldset>
         <legend>Créditos</legend>
