@@ -9,12 +9,17 @@
     function BillingCycleController($http, msgs, tabs){
         const vm = this;
         const url ="http://localhost:3003/api/billingCycles";
+        vm.page = 1;
 
         vm.refresh = function(){
-            $http.get(url).then( function(response){
+            $http.get(`${url}?skip=${(vm.page - 1) * 10 }&limit=10`).then( function(response){
                 vm.billingCycle = { credits: [{}], debts:[{}] }
                 vm.billingCycles = response.data;
-                tabs.show(vm, {tabList: true, tabCreate: true})
+
+                $http.get(`${url}/count`).then( function(response){
+                  vm.pages = Math.ceil(response.data.value / 10);
+                  tabs.show(vm, {tabList: true, tabCreate: true})
+                })
             })
         }
 

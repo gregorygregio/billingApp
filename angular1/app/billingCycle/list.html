@@ -24,4 +24,8 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="box-footer clearfix">
+      <paginator pages="{{bcCtrl.pages}}" current-page="bcCtrl.page" ng-click="bcCtrl.refresh()"></paginator>
+  </div>
 </div>
