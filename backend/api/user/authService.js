@@ -41,9 +41,14 @@ const login = (req, res) => {
   User.findOne( {email}, (err, user) => {
     if(err) return res.status(400).send({errors: err})
     if(user) {
-      bcrypt.compare(password, user.password, (err, res) =>{
+      bcrypt.compare(password, user.password, (err, resulst) => {
         if(err) return res.status(400).send({errors: err});
-        if(!res) return res.status(400).send({errors: "Usuário/Senha inválido"});
+        if(!resulst) return res.status(400).send({errors: "Usuário/Senha inválido"});
+
+        const token = generateToken(user);
+
+        const { name } = user;
+        res.json( { name, email, token} );
       })
     } else {
       return res.status(400).send({errors: "Usuário/Senha inválido"});
